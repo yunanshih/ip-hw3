@@ -11,7 +11,6 @@ from jpeg.util import ZIGZAG_INDICES_BACKWARD, build_q_table
 LEN_HEADER = 11
 NUM_CHANNELS = 3  # YCbCr
 
-
 class JPEGDecoder:
     def __init__(self, f):
         self.f = f
@@ -110,8 +109,8 @@ class JPEGDecoder:
 
                 qblock = self.inverse_zigzag_scan(zvector)
                 fblock = self.dequantize(qblock)
-                # nblock = self.idct(fblock)
-                nblock = self.idft(fblock)
+                nblock = self.idct(fblock)
+                # nblock = self.idft(fblock)
                 block = self.denormalize(nblock)
                 # write to pix
                 pix[block_y*8:block_y*8+8,block_x*8:block_x*8+8,c] = block

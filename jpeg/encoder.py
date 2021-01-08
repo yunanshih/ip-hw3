@@ -9,7 +9,6 @@ import jpeg.dct as dct
 import jpeg.huffman as huffman
 from jpeg.util import ZIGZAG_INDICES, build_q_table
 
-
 class JPEGEncoder:
     def __init__(self, path, m, scale, n):
         assert m >= 0 and scale > 0 and n >= 1
@@ -27,6 +26,21 @@ class JPEGEncoder:
 
         self.quantization_table = build_q_table(m, scale, n)
         print(f'quantization_table: {self.quantization_table}')
+
+        # # 4:2:0
+        # self.img[1::2, :] = self.img[::2, :]  # vertical
+        # self.img[:, 1::2] = self.img[:, ::2]  # horizontal
+
+        # 4:2:2
+        # self.img[:, 1::2] = self.img[:, ::2]
+
+        # # 4:1:0
+        # self.img[1::2, :] = self.img[::2, :]
+
+        # # 4:1:1
+        # self.img = numpy.reshape(self.img, [-1, 1, 4])
+        # self.img[:,:,:] = self.img[:,:,0].reshape([-1,1,1]) 
+        # self.img = numpy.reshape(self.img, self.img.shape)
 
     def __getitem__(self, key):
         block_y, block_x = key

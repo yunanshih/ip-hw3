@@ -12,7 +12,6 @@ def dct_matrix(n):
     ret[0] /= math.sqrt(2)  # X_0 /= sqrt(2)
     return ret * math.sqrt(2 / n)
 
-
 def idct_matrix(n):
     ret = numpy.empty((n, n))
 
